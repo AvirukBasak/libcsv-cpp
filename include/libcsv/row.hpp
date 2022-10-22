@@ -3,21 +3,24 @@
 #include <string>
 #include <vector>
 
+#include "value.hpp"
+#include "exceptions.hpp"
+
 namespace csv
 {
     class row
     {
+        friend class data;
+        friend class row;
+        friend class value;
     public:
-        row(const csv::row &r);
-        row(const std::vector<std::string> &colnames, const std::vector<csv::value> &row);
-        csv::value column(const std::string &colname);
+        row(const row &r);
+        row(const std::vector<std::string> &colnames, const std::vector<value> &row);
+        value column(const std::string &colname);
         ~row();
     private:
-        friend class csv::data;
-        friend class csv::row;
-        friend class csv::value;
         row();
         std::vector<std::string> m_colnames;
-        std::vector<csv::value> m_row;
+        std::vector<value> m_row;
     };
 }

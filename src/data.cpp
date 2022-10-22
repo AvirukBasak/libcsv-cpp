@@ -3,8 +3,8 @@
 
 #include "libcsv/data.hpp"
 
-data(const data &d)
-    : m_
+csv::data::data(const csv::data &d)
+{}
 
 int csv::data::countRows()
 {

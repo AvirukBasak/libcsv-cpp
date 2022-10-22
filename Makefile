@@ -31,7 +31,7 @@ TESTSRC     := $(shell find $(EXAMPLE_DIR)/ -name "*."$(SRCEXT))
 
 all: mkdirp $(TARGET)
 
-$(TARGET): SOURCES
+$(TARGET): $(LIB_DIR)/libcsv.hpp $(SOURCES)
 	@cd $(SRC_DIR) && $(MAKE)
 	ar rcs $(TARGET) $(BIN_DIR)/*.$(OBJEXT)
 
@@ -39,9 +39,12 @@ $(TARGET): SOURCES
 
 dbg: mkdirp $(DBG_TARGET)
 
-$(DBG_TARGET): $(SOURCES)
+$(DBG_TARGET): $(LIB_DIR)/libcsv.hpp $(SOURCES)
 	@cd $(SRC_DIR) && $(MAKE) dbg
 	ar rcs $(DBG_TARGET) $(BIN_DIR)/*-dbg.$(OBJEXT)
+
+$(LIB_DIR)/libcsv.hpp:
+	cat $(shell find $(INCLUDE_DIR)/ -name "*.$(HEADEREXT)") $(LIB_DIR)/libcsv.hpp
 
 ## execution
 

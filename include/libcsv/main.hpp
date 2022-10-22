@@ -3,9 +3,12 @@
 #include <string>
 #include <vector>
 
+#include "value.hpp"
+#include "row.hpp"
+#include "data.hpp"
+#include "exceptions.hpp"
+
 namespace csv
 {
-    typedef std::string Exception;
-    const Exception TypeMismatchException;
-    csv::data loadFile(const std::string &path);
+    data loadFile(const std::string &path);
 }
