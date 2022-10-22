@@ -4,5 +4,5 @@
 namespace csv
 {
     typedef std::string Exception;
-    const Exception TypeMismatchException;
+    const Exception TypeMismatchException = "csv::TypeMismatchException";
 }
