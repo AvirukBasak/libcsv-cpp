@@ -20,8 +20,8 @@ int csv::data::countCols()
 std::vector<std::string> csv::data::getColumns()
 {}
 
-csv::row row(int rownum)
+csv::row csv::data::row(int rownum)
 {}
 
-std::vector<csv::row> rows(const std::function<void (csv::row row)> &f)
+std::vector<csv::row> csv::data::rows(const std::function<void (csv::row row)> &f)
 {}

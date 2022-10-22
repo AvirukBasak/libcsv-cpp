@@ -50,11 +50,11 @@ $(LIB_DIR)/libcsv.hpp: $(HEADERS)
 ## execution
 
 test: $(TARGET) $(TESTSRC)
-	$(CC) $(CPPFLAGS) $(INCLUDE) $(EXAMPLE_DIR)/*.cpp -o $(BIN_DIR)/exe $(LIB)
-	./$(BIN_DIR)/test
+	@$(CC) $(CPPFLAGS) $(INCLUDE) $(EXAMPLE_DIR)/*.cpp -o $(BIN_DIR)/test $(LIB)
+	$(BIN_DIR)/test
 
 testdbg: $(DBG_TARGET) $(TESTSRC)
-	$(CC) $(CPPDBGFLAGS) $(INCLUDE) $(EXAMPLE_DIR)/*.cpp -o $(BIN_DIR)/exe-dbg $(LIB)
+	@$(CC) $(CPPDBGFLAGS) $(INCLUDE) $(EXAMPLE_DIR)/*.cpp -o $(BIN_DIR)/test-dbg $(LIB)
 	$(DBG) $(BIN_DIR)/test-dbg
 
 ## mkdirp
