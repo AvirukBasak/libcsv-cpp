@@ -1,5 +1,5 @@
 #include <iostream>
-#include "../lib/libcsv.hpp"
+#include "libcsv.hpp"
 
 int main()
 {

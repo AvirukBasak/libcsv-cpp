@@ -6,6 +6,7 @@ HEADEREXT   := hpp
 
 SRC_DIR     := ../src
 BIN_DIR     := ../bin
+LIB_DIR     := ../lib
 EXAMPLE_DIR := ../examples
 INCLUDE_DIR := ../include
 
@@ -15,7 +16,7 @@ CC          := clang++ $(WALL)
 CPPFLAGS    := -Ofast
 CPPDBGFLAGS := -g -ggdb
 
-INCLUDE     := -I $(INCLUDE_DIR)
+INCLUDE     := -I $(INCLUDE_DIR) -I $(LIB_DIR)
 
 OBJECTS     := $(patsubst %.$(SRCEXT), %.$(OBJEXT), $(wildcard *.$(SRCEXT)))
 
