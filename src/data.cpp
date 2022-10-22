@@ -1,5 +1,6 @@
 #include <string>
 #include <vector>
+#include <functional>
 
 #include "libcsv/data.hpp"
 
@@ -16,8 +17,8 @@ int csv::data::countCols()
     return m_cols;
 }
 
-csv::row row()
+csv::row row(int rownum)
 {}
 
-std::vector<csv::row> rows()
+std::vector<csv::row> rows(const std::function<void (csv::row row)> &f)
 {}

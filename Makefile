@@ -16,7 +16,7 @@ CC          := clang++ $(WALL)
 CPPFLAGS    := -Ofast
 CPPDBGFLAGS := -g -ggdb
 
-INCLUDE     := -I $(INCLUDE_DIR) -I (LIB_DIR)
+INCLUDE     := -I $(INCLUDE_DIR) -I $(LIB_DIR)
 LIB         := -L$(LIB_DIR) -lcsv -lm
 
 # targets
@@ -31,7 +31,7 @@ TESTSRC     := $(shell find $(EXAMPLE_DIR)/ -name "*."$(SRCEXT))
 
 all: mkdirp $(TARGET)
 
-$(TARGET): mklibcsv_header $(SOURCES)
+$(TARGET): $(LIB_DIR)/libcsv.hpp $(SOURCES)
 	@cd $(SRC_DIR) && $(MAKE)
 	ar rcs $(TARGET) $(BIN_DIR)/*.$(OBJEXT)
 
@@ -39,22 +39,21 @@ $(TARGET): mklibcsv_header $(SOURCES)
 
 dbg: mkdirp $(DBG_TARGET)
 
-$(DBG_TARGET): mklibcsv_header $(SOURCES)
+$(DBG_TARGET): $(LIB_DIR)/libcsv.hpp $(SOURCES)
 	@cd $(SRC_DIR) && $(MAKE) dbg
 	ar rcs $(DBG_TARGET) $(BIN_DIR)/*-dbg.$(OBJEXT)
 
-mklibcsv_header:
-	@$(CC) -E $(INCLUDE_DIR)/libcsv.hpp -o $(LIB_DIR)/libcsv.hpp
-	@printf '%s\n%s\n' "#pragma once" "$(cat $(LIB_DIR)/libcsv.hpp)" > $(LIB_DIR)/libcsv.hpp
+$(LIB_DIR)/libcsv.hpp:
+	@grep --no-filename -v '^#\s*include\s*"' $(shell find $(INCLUDE_DIR)/ -name "*.$(HEADEREXT)") > $(LIB_DIR)/libcsv.hpp
 
 ## execution
 
 test: $(TARGET) $(TESTSRC)
-	$(CC) $(CPPFLAGS) $(EXAMPLE_DIR)/*.cpp -o $(BIN_DIR)/exe $(LIB)
+	$(CC) $(CPPFLAGS) $(INCLUDE) $(EXAMPLE_DIR)/*.cpp -o $(BIN_DIR)/exe $(LIB)
 	./$(BIN_DIR)/test
 
 testdbg: $(DBG_TARGET) $(TESTSRC)
-	$(CC) $(CPPDBGFLAGS) $(EXAMPLE_DIR)/*.cpp -o $(BIN_DIR)/exe-dbg $(LIB)
+	$(CC) $(CPPDBGFLAGS) $(INCLUDE) $(EXAMPLE_DIR)/*.cpp -o $(BIN_DIR)/exe-dbg $(LIB)
 	$(DBG) $(BIN_DIR)/test-dbg
 
 ## mkdirp
