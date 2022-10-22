@@ -26,6 +26,7 @@ DBG_TARGET  := $(LIB_DIR)/libcsv-dbg.a
 
 SOURCES     := $(shell find $(SRC_DIR)/ -name "*."$(SRCEXT))
 TESTSRC     := $(shell find $(EXAMPLE_DIR)/ -name "*."$(SRCEXT))
+HEADERS     := $(shell find $(INCLUDE_DIR)/ -name "*.$(HEADEREXT)")
 
 ## release build
 
@@ -43,8 +44,8 @@ $(DBG_TARGET): $(LIB_DIR)/libcsv.hpp $(SOURCES)
 	@cd $(SRC_DIR) && $(MAKE) dbg
 	ar rcs $(DBG_TARGET) $(BIN_DIR)/*-dbg.$(OBJEXT)
 
-$(LIB_DIR)/libcsv.hpp:
-	@grep --no-filename -v '^#\s*include\s*"' $(shell find $(INCLUDE_DIR)/ -name "*.$(HEADEREXT)") > $(LIB_DIR)/libcsv.hpp
+$(LIB_DIR)/libcsv.hpp: $(HEADERS)
+	@grep --no-filename -v '^#\s*include\s*"' $(HEADERS) > $(LIB_DIR)/libcsv.hpp
 
 ## execution
 
