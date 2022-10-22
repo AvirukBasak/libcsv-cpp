@@ -44,7 +44,8 @@ $(DBG_TARGET): mklibcsv_header $(SOURCES)
 	ar rcs $(DBG_TARGET) $(BIN_DIR)/*-dbg.$(OBJEXT)
 
 mklibcsv_header:
-	cat $(shell find $(INCLUDE_DIR)/ -name "*.$(HEADEREXT)") > $(LIB_DIR)/libcsv.hpp
+	@$(CC) -E $(INCLUDE_DIR)/libcsv.hpp -o $(LIB_DIR)/libcsv.hpp
+	@printf '%s\n%s\n' "#pragma once" "$(cat $(LIB_DIR)/libcsv.hpp)" > $(LIB_DIR)/libcsv.hpp
 
 ## execution
 
