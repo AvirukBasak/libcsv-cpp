@@ -16,7 +16,7 @@ CC          := clang++ $(WALL)
 CPPFLAGS    := -Ofast
 CPPDBGFLAGS := -g -ggdb
 
-INCLUDE     := -I $(INCLUDE_DIR) -I $(LIB_DIR)
+INCLUDE     := -I $(INCLUDE_DIR)
 
 OBJECTS     := $(patsubst %.$(SRCEXT), %.$(OBJEXT), $(wildcard *.$(SRCEXT)))
 

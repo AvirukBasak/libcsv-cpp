@@ -17,6 +17,9 @@ int csv::data::countCols()
     return m_cols;
 }
 
+std::vector<std::string> csv::data::getColumns()
+{}
+
 csv::row row(int rownum)
 {}
 

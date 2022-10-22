@@ -19,6 +19,7 @@ namespace csv
         data(const data &d);
         int countRows();
         int countCols();
+        std::vector<std::string> getColumns();
         csv::row row(int rownum);
         std::vector<csv::row> rows(const std::function<void (csv::row row)> &f);
     private:
