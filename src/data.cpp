@@ -51,12 +51,12 @@ csv::row csv::data::getRow(const std::string &uid)
     return csv::data::operator[](uid);
 }
 
-csv::row &csv::data::operator[](const std::string &uid)
+csv::row csv::data::operator[](const std::string &uid)
 {
-    for (const csv::row &row : m_rows)
-        if (row[0] == uid) return row;
+    for (csv::row &row : m_rows)
+        if (row.m_row[0].toString() == uid) return row;
     csv::throwException<csv::ValueNotFoundException>("for row uid \"" + uid + "\"");
-    return csv::garbage_value;
+    return csv::row();
 }
 
 std::vector<csv::row> csv::data::getRows(const std::function<bool (csv::row row)> &condition)

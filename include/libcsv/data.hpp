@@ -71,7 +71,7 @@ namespace csv
          * @return csv::row &
          * @throws csv::ValueNotFoundException If rownum is out of range
          */
-        csv::row &operator[](const std::string &uid);
+        csv::row operator[](const std::string &uid);
         /**
          * Get a list of rows from the table that satisfy the condition function.
          * @param std::function<bool (csv::row row)>

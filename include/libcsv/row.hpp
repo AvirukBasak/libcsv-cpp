@@ -14,10 +14,6 @@ namespace csv
         friend class value;
     public:
         /**
-         * A row cannot be empty.
-         */
-        row() = delete;
-        /**
          * Copy a row.
          * @param csv::row
          */
@@ -49,6 +45,10 @@ namespace csv
         value &operator[](const std::string &colname);
         ~row();
     private:
+        /**
+         * A row cannot be empty.
+         */
+        row();
         /** Pointer to csv::data::m_colnames */
         const std::vector<std::string> *m_colnames;
         /** Data in row */
