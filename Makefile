@@ -60,11 +60,11 @@ $(LIB_DIR)/libcsv.hpp: $(HEADERS)
 
 ## execution
 
-test: $(TARGET) $(TESTSRC)
+test: mkdirp $(TARGET) $(TESTSRC)
 	@$(CC) $(CPPFLAGS) $(INCLUDE) $(TEST_DIR)/*.cpp -o $(BIN_DIR)/test $(LIB)
 	./$(BIN_DIR)/test
 
-testdbg: $(DBG_OBJECTS) $(TESTSRC)
+testdbg: mkdirp $(DBG_OBJECTS) $(TESTSRC)
 	@$(CC) $(CPPDBGFLAGS) $(INCLUDE) $(DBG_OBJECTS) $(TEST_DIR)/*.cpp -o $(BIN_DIR)/test-dbg
 	$(DBG) $(BIN_DIR)/test-dbg
 
