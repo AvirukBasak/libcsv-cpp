@@ -30,11 +30,10 @@ csv::data csv::loadFile(const std::string &path)
     if (!csvfile.eof())
         std::getline(csvfile, line);
     csv::data csvdata(csv::tokenizeLine(line));
-    int rowno = 1;
-    while (csvfile.is_open() && !csvfile.eof()) {
+    while (!csvfile.eof()) {
         std::getline(csvfile, line);
+        if (line == "") break;
         csvdata.appendRow(csv::tokenizeLine(line));
-        rowno++;
     }
     csvfile.close();
     return csvdata;
