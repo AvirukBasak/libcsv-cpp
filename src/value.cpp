@@ -3,6 +3,34 @@
 
 #include "libcsv/value.hpp"
 
+csv::value::value(bool v)
+    : m_val(v ? "true" : "false")
+{}
+
+csv::value::value(char v)
+    : m_val(std::string("") + v)
+{}
+
+csv::value::value(short v)
+    : m_val(std::to_string(v))
+{}
+
+csv::value::value(int v)
+    : m_val(std::to_string(v))
+{}
+
+csv::value::value(long long v)
+    : m_val(std::to_string(v))
+{}
+
+csv::value::value(float v)
+    : m_val(std::to_string(v))
+{}
+
+csv::value::value(double v)
+    : m_val(std::to_string(v))
+{}
+
 csv::value::value(const csv::value &v)
     : m_val(v.m_val)
 {}
@@ -26,7 +54,8 @@ bool csv::value::toBool()
         return true;
     else if (m_val == "false" || (int) std::stoi(m_val) == 0)
         return false;
-    else throw csv::TypeMismatchException;
+    else csv::throwException(csv::TypeMismatchException);
+    return false;
 }
 
 char csv::value::toChar()

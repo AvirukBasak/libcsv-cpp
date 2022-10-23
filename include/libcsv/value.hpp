@@ -13,6 +13,14 @@ namespace csv
         friend class row;
         friend class value;
     public:
+        value() = delete;
+        value(bool v);
+        value(char v);
+        value(short v);
+        value(int v);
+        value(long long v);
+        value(float v);
+        value(double v);
         value(const value &v);
         value(const std::string &s);
         std::string toString();
@@ -28,7 +36,6 @@ namespace csv
         float toFloat();
         double toDouble();
     private:
-        value();
         std::string m_val;
     };
 }

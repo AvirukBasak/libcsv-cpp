@@ -14,13 +14,15 @@ namespace csv
         friend class row;
         friend class value;
     public:
+        row() = delete;
         row(const row &r);
-        row(const std::vector<std::string> &colnames, const std::vector<value> &row);
+        row(const std::vector<std::string> *colnames, const std::vector<value> &r);
+        int length();
         value column(const std::string &colname);
         ~row();
     private:
-        row();
-        std::vector<std::string> m_colnames;
+        row(const std::vector<std::string> &r);
+        const std::vector<std::string> *m_colnames;
         std::vector<value> m_row;
     };
 }

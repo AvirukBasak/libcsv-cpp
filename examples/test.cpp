@@ -14,11 +14,11 @@ int main()
      *   0,   Joe,       i05,  93
      */
     csv::data data = csv::loadFile("files/test.csv");
-    std::vector<std::string> colnames = data.getColumns();
-    int rows = data.countRows();
-    int cols = data.countCols();
-    std::string name = data.row(3).column("names").toString(); // returns "Jack"
-    std::vector<csv::row> moreThan80 = data.rows([](csv::row row) { return row.column("marks").toInt() > 80; });
+    std::vector<std::string> colnames = data.getColumnNames();
+    int rows = data.rows();
+    int cols = data.columns();
+    std::string name = data.getRow(3).column("names").toString(); // returns "Jack"
+    std::vector<csv::row> moreThan80 = data.getRows([](csv::row row) { return row.column("marks").toInt() > 80; });
     for (auto &row : moreThan80)
         if (row.column("name").toString() == "Joe") {
             std::cout << "Joe's score is over 80\n";
