@@ -74,7 +74,7 @@ namespace csv
         csv::row operator[](const std::string &uid);
         /**
          * Get a list of rows from the table that satisfy the condition function.
-         * @param std::function<bool (const csv::row &row)>
+         * @param std::function<bool (const csv::row &row)> If const csv::row &row is too much, use auto
          * @return std::vector<csv::row>
          */
         std::vector<csv::row> getRows(const std::function<bool (const csv::row &row)> &condition);

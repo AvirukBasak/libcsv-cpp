@@ -59,7 +59,7 @@ csv::row csv::data::operator[](const std::string &uid)
     return csv::row();
 }
 
-std::vector<csv::row> csv::data::getRows(const std::function<bool (csv::row row)> &condition)
+std::vector<csv::row> csv::data::getRows(const std::function<bool (const csv::row &row)> &condition)
 {
     std::vector<csv::row> vec_rows;
     for (const csv::row &row : m_rows)

@@ -24,7 +24,7 @@ int main()
     std::cout << "csv dimensions: " << rows << "×" << cols << "\n";
     std::string name = data["i02"]["names"].toString(); // returns "Joseph"
     std::cout << "retrieved name: " << name << ", for id: " << "i02" << "\n";
-    std::vector<csv::row> moreThan80 = data.getRows([](csv::row row) { return row["marks"].toInt() > 80; });
+    std::vector<csv::row> moreThan80 = data.getRows([](auto row) { return row["marks"].toInt() > 80; });
     for (auto &row : moreThan80)
         if (row["names"].toString() == "Joe") {
             std::cout << "Joe's score is over 80\n";
@@ -33,3 +33,13 @@ int main()
         }
     return 0;
 }
+
+/* OUTPUT
+
+columns present: { uid, slno, names, marks, }
+csv dimensions: 6×4
+retrieved name: Joseph, for id: i02
+Joe's score is over 80
+Joe's slno is 5
+
+*/
