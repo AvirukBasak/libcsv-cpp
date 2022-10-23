@@ -3,8 +3,8 @@
 
 int main()
 {
-    /* 1st row -> col names
-     * 1st col -> slno (int) or uid (std::string)
+    /* 1st row -> std::string column_name
+     * 1st col -> std::string unique_id
      * uid,  slno,  names,       marks
      *  i03,  0      John,        83
      *  i05,  1      Jack,        73
