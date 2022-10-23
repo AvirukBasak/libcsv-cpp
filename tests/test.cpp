@@ -17,12 +17,7 @@ int main()
     std::vector<std::string> colnames = data.getColumnNames();
     int rows = data.rows();
     int cols = data.columns();
-    std::string name;
-    try {
-        name = data.getRow(3).column("names").toString(); // returns "James"
-    } catch(csv::IndexOutOfBoundsException ex) {
-        ex.print();
-    }
+    std::string name = data.getRow(3).column("names").toString(); // returns "James"
     std::vector<csv::row> moreThan80 = data.getRows([](csv::row row) { return row.column("marks").toInt() > 80; });
     for (auto &row : moreThan80)
         if (row.column("name").toString() == "Joe") {
