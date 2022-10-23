@@ -7,9 +7,12 @@ csv::row::row(const csv::row &r)
     : m_colnames(r.m_colnames), m_row(r.m_row)
 {}
 
-csv::row::row(const std::vector<std::string> *colnames, const std::vector<csv::value> &r)
-    : m_colnames(colnames), m_row(r)
-{}
+csv::row::row(const std::vector<std::string> *colnames, const std::vector<std::string> &r)
+    : m_colnames(colnames)
+{
+    for (auto &str : row)
+        m_row.push_back(csv::value(str));
+}
 
 int csv::row::length()
 {
@@ -23,6 +26,18 @@ csv::value csv::row::column(const std::string &colname)
         if (cn == colname)
             return m_row[i];
         else i++;
+    throw csv::ValueNotFoundException("for column name \"" + colname + "\"");
+    return "NULL";
+}
+
+csv::value &csv::row::operator[](const std::string &colname)
+{
+    int i = 0;
+    for (const std::string &cn : *m_colnames)
+        if (cn == colname)
+            return m_row[i];
+        else i++;
+    throw csv::ValueNotFoundException("for column name \"" + colname + "\"");
     return "NULL";
 }
 

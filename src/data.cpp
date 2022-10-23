@@ -4,8 +4,8 @@
 
 #include "libcsv/data.hpp"
 
-csv::data::data()
-    : m_rowc(0), m_colc(0)
+csv::data::data(const std::vector<std::string> &colnames)
+    : m_rowc(0), m_colc(colnames.size()), m_colnames(colnames)
 {}
 
 csv::data::data(const csv::data &d)
@@ -33,15 +33,17 @@ std::vector<std::string> csv::data::getColumnNames()
     return m_colnames;
 }
 
-void csv::data::setColumnNames(const std::vector<std::string> &colnames)
-{
-    m_colnames = colnames;
-    m_colc = colnames.size();
-}
-
 csv::row csv::data::getRow(int rownum)
 {
-    if (rownum < 0 || rownum >= m_rowc) csv::throwException(csv::IndexOutOfBoundsException);
+    if (rownum < 0 || rownum >= m_rowc)
+        throw csv::IndexOutOfBoundsException("for index " + std::to_string(rownum));
+    return m_rows[rownum];
+}
+
+csv::row &csv::data::operator[](int rownum)
+{
+    if (rownum < 0 || rownum >= m_rowc)
+        throw csv::IndexOutOfBoundsException("for index " + std::to_string(rownum));
     return m_rows[rownum];
 }
 
@@ -53,17 +55,10 @@ std::vector<csv::row> csv::data::getRows(const std::function<bool (csv::row row)
     return vec_rows;
 }
 
-void csv::data::insertNextRow(const csv::row &row)
+void csv::data::appendRow(const std::vector<std::string> &row)
 {
-    m_rows.push_back(row);
-    m_rowc++;
-}
-
-void csv::data::insertNextRow(const std::vector<std::string> &row)
-{
-    std::vector<value> valrow;
-    for (auto &v : row)
-        valrow.push_back(value(v));
-    m_rows.push_back(csv::row(&m_colnames, valrow));
+    if (row.size() != m_colc)
+        throw csv::ColumnSizeMismatchException("for row parameter with size " + std::to_string(row.size()));
+    m_rows.push_back(csv::row(&m_colnames, row));
     m_rowc++;
 }

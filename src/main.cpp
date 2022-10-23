@@ -25,7 +25,7 @@ csv::data csv::loadFile(const std::string &path)
         if (rowno == 0)
             csvdata.setColumnNames(row);
         else
-            csvdata.insertNextRow(row);  
+            csvdata.appendRow(row);  
     }
     csvfile.close();
     return csvdata;
