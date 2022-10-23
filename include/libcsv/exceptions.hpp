@@ -1,4 +1,5 @@
 #pragma once
+
 #include <string>
 
 namespace csv
@@ -8,6 +9,8 @@ namespace csv
     public:
         Exception();
         Exception(const std::string &str);
+        std::string toString();
+        void print();
     private:
         std::string m_msg;
     };

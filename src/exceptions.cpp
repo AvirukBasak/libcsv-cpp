@@ -1,4 +1,6 @@
 #include <iostream>
+#include <string>
+
 #include "libcsv/exceptions.hpp"
 
 csv::Exception::Exception()
@@ -8,6 +10,16 @@ csv::Exception::Exception()
 csv::Exception::Exception(const std::string &s)
     : m_msg("csv::Exception: " + s)
 {}
+
+std::string csv::Exception::toString()
+{
+    return m_msg;
+}
+
+void csv::Exception::print()
+{
+    std::cerr << m_msg << "\n";
+}
 
 csv::ValueNotFoundException::ValueNotFoundException()
     : csv::Exception("csv::ValueNotFoundException")
