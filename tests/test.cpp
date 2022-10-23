@@ -17,12 +17,12 @@ int main()
     std::vector<std::string> colnames = data.getColumnNames();
     int rows = data.rows();
     int cols = data.columns();
-    std::string name = data.getRow(3).column("names").toString(); // returns "James"
-    std::vector<csv::row> moreThan80 = data.getRows([](csv::row row) { return row.column("marks").toInt() > 80; });
+    std::string name = data[0]["names"].toString(); // returns "James"
+    std::vector<csv::row> moreThan80 = data.getRows([](csv::row row) { return row["marks"].toInt() > 80; });
     for (auto &row : moreThan80)
-        if (row.column("name").toString() == "Joe") {
+        if (row["name"].toString() == "Joe") {
             std::cout << "Joe's score is over 80\n";
-            std::cout << "Joe's id is " << row.column("id").toString() << "\n";
+            std::cout << "Joe's id is " << row["id"].toString() << "\n";
             break;
         }
     return 0;
