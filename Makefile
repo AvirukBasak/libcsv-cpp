@@ -46,6 +46,7 @@ $(DBG_TARGET): $(LIB_DIR)/libcsv.hpp $(SOURCES)
 
 $(LIB_DIR)/libcsv.hpp: $(HEADERS)
 	@grep --no-filename -v '^#\s*include\s*"' $(HEADERS) > $(LIB_DIR)/libcsv.hpp
+	$(info make $(LIB_DIR)/libcsv.hpp)
 
 ## execution
 

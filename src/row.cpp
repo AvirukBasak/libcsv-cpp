@@ -23,6 +23,7 @@ csv::value csv::row::column(const std::string &colname)
         if (cn == colname)
             return m_row[i];
         else i++;
+    return "NULL";
 }
 
 csv::row::~row()
