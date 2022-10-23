@@ -4,26 +4,27 @@
 int main()
 {
     /* 1st row -> col names
-     * 1st col -> slno or uid
-     * slno, names,     id,   marks
-     *   0,   John,      i00,  83
-     *   1,   Jack,      i01,  73
-     *   2,   James,     i02,  96
-     *   3,   Johnathan, i03,  79
-     *   4,   Joseph,    i04,  84
-     *   5,   Joe,       i05,  93
+     * 1st col -> slno (int) or uid (std::string)
+     * uid,  slno,  names,       marks
+     *  i03,  0      John,        83
+     *  i05,  1      Jack,        73
+     *  i01,  2      James,       96
+     *  i04,  3      Johnathan,   79
+     *  i02,  4      Joseph,      84
+     *  i00,  5      Joe,         93
      */
     csv::data data = csv::loadFile("tests/files/test.csv");
     std::vector<std::string> colnames = data.getColumnNames();
     int rows = data.rows();
     int cols = data.columns();
     std::cout << "csv dimensions: " << rows << "×" << cols << "\n";
-    std::string name = data[1]["names"].toString(); // returns "Jack"
+    std::string name = data["i03"]["names"].toString(); // returns "Jack"
+    std::cout << "retrieved name: " << name << ", for id: " << "i03" << "\n";
     std::vector<csv::row> moreThan80 = data.getRows([](csv::row row) { return row["marks"].toInt() > 80; });
     for (auto &row : moreThan80)
         if (row["names"].toString() == "Joe") {
             std::cout << "Joe's score is over 80\n";
-            std::cout << "Joe's id is " << row["id"].toString() << "\n";
+            std::cout << "Joe's uid is " << row["uid"].toString() << "\n";
             break;
         }
     return 0;

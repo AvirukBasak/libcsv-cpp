@@ -1,7 +1,7 @@
-slno, names,     id,   marks
-  5,   John,      i00,  83
-  3,   Jack,      i01,  73
-  2,   James,     i02,  96
-  1,   Johnathan, i03,  79
-  4,   Joseph,    i04,  84
-  0,   Joe,       i05,  93
+uid,  slno,   names,       marks
+ i03,  0,      John,        83
+ i05,  1,      Jack,        73
+ i01,  2,      James,       96
+ i04,  3,      Johnathan,   79
+ i02,  4,      Joseph,      84
+ i00,  5,      Joe,         93

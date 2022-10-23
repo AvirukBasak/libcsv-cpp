@@ -4,6 +4,10 @@
 #include "libcsv/exceptions.hpp"
 #include "libcsv/row.hpp"
 
+csv::row::row()
+    : m_colnames(nullptr), m_row(std::vector<csv::value>())
+{}
+
 csv::row::row(const csv::row &r)
     : m_colnames(r.m_colnames), m_row(r.m_row)
 {}

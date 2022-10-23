@@ -19,12 +19,6 @@ namespace csv
          */
         row(const row &r);
         /**
-         * Construct a row from a vector of std::string.
-         * @param std::vector<std::string>* Pointer to csv::data::m_colnames
-         * @param std::vector<std::string>
-         */
-        row(const std::vector<std::string> *colnames, const std::vector<std::string> &r);
-        /**
          * Get row length.
          * @return int
          */
@@ -49,6 +43,12 @@ namespace csv
          * A row cannot be empty.
          */
         row();
+        /**
+         * Construct a row from a vector of std::string.
+         * @param std::vector<std::string>* Pointer to csv::data::m_colnames
+         * @param std::vector<std::string>
+         */
+        row(const std::vector<std::string> *colnames, const std::vector<std::string> &r);
         /** Pointer to csv::data::m_colnames */
         const std::vector<std::string> *m_colnames;
         /** Data in row */

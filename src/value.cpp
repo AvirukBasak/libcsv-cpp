@@ -4,6 +4,10 @@
 #include "libcsv/exceptions.hpp"
 #include "libcsv/value.hpp"
 
+csv::value::value()
+    : m_val("0")
+{}
+
 csv::value::value(bool v)
     : m_val(v ? "true" : "false")
 {}
