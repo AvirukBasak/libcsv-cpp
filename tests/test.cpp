@@ -17,10 +17,10 @@ int main()
     std::vector<std::string> colnames = data.getColumnNames();
     int rows = data.rows();
     int cols = data.columns();
-    std::string name = data[0]["names"].toString(); // returns "James"
+    std::string name = data[1]["names"].toString(); // returns "Jack"
     std::vector<csv::row> moreThan80 = data.getRows([](csv::row row) { return row["marks"].toInt() > 80; });
     for (auto &row : moreThan80)
-        if (row["name"].toString() == "Joe") {
+        if (row["names"].toString() == "Joe") {
             std::cout << "Joe's score is over 80\n";
             std::cout << "Joe's id is " << row["id"].toString() << "\n";
             break;
