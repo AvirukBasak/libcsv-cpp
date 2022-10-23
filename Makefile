@@ -72,3 +72,4 @@ cleaner:
 	@rm -f $(BIN_DIR)/*
 	@rm -f $(TARGET)
 	@rm -f $(DBG_TARGET)
+	@rm -f $(LIB_DIR)/libcsv.hpp
