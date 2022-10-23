@@ -15,6 +15,8 @@ csv::row::row(const csv::row &r)
 csv::row::row(const std::vector<std::string> *colnames, const std::vector<std::string> &r)
     : m_colnames(colnames)
 {
+    if ((*m_colnames).size() != r.size())
+        csv::throwException<csv::ColumnSizeMismatchException>("for row parameter with size " + std::to_string(r.size()));
     for (auto &str : r)
         m_row.push_back(csv::value(str));
 }
@@ -38,6 +40,18 @@ csv::value &csv::row::operator[](const std::string &colname)
         else i++;
     csv::throwException<csv::ValueNotFoundException>("for column name \"" + colname + "\"");
     return csv::garbage_val;
+}
+
+csv::value csv::row::column(int index)
+{
+    return csv::row::operator[](index);
+}
+
+csv::value &csv::row::operator[](int index)
+{
+    if (index < 0 || index >= m_row.size())
+        csv::throwException<csv::IndexOutOfBoundsException>("for column index " + std::to_string(index));
+    return m_row[index];
 }
 
 csv::row::~row()

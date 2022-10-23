@@ -19,25 +19,42 @@ namespace csv
          */
         row(const row &r);
         /**
+         * Destroy row object.
+         */
+        ~row();
+        /**
          * Get row length.
          * @return int
          */
         int length();
         /**
-         * Get value of a row for a specified column.
+         * Get value of a row for a specified column name.
          * @param std::string
          * @return csv::value
-         * @throws csv::ValueNotFoundException If value is not found for specified column name
+         * @throws csv::ValueNotFoundException If column name doesn't exist
          */
         value column(const std::string &colname);
         /**
-         * Get value of a row for a specified column.
+         * Get value of a row for a specified column name.
          * @param std::string
          * @return csv::value &
-         * @throws csv::ValueNotFoundException If value is not found for specified column name
+         * @throws csv::ValueNotFoundException If column name doesn't exist
          */
         value &operator[](const std::string &colname);
-        ~row();
+        /**
+         * Get value of a row for a specified column index.
+         * @param int
+         * @return csv::value
+         * @throws csv::IndexOutOfBoundsException If column index is out of range
+         */
+        value column(int index);
+        /**
+         * Get value of a row for a specified column index.
+         * @param int
+         * @return csv::value &
+         * @throws csv::IndexOutOfBoundsException If column index is out of range
+         */
+        value &operator[](int index);
     private:
         /**
          * A row cannot be empty.
