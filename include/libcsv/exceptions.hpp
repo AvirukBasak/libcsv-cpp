@@ -16,7 +16,7 @@ namespace csv
     };
 
     /** Occurs when a value is not found at a row, column. */
-    class ValueNotFoundException : Exception
+    class ValueNotFoundException : public Exception
     {
     public:
         ValueNotFoundException();
@@ -24,7 +24,7 @@ namespace csv
     };
 
     /** Occurs when csv::value to converted to an invalid C++ type. */
-    class TypeMismatchException : Exception
+    class TypeMismatchException : public Exception
     {
     public:
         TypeMismatchException();
@@ -32,7 +32,7 @@ namespace csv
     };
 
     /** Occurs when accessed index of a table is invalid. */
-    class IndexOutOfBoundsException : Exception
+    class IndexOutOfBoundsException : public Exception
     {
     public:
         IndexOutOfBoundsException();
@@ -40,7 +40,7 @@ namespace csv
     };
 
     /** Occurs when a row that is less or more in length than total number of column names is appended to a data table. */
-    class ColumnSizeMismatchException : Exception
+    class ColumnSizeMismatchException : public Exception
     {
     public:
         ColumnSizeMismatchException();

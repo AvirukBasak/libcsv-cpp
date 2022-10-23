@@ -8,7 +8,7 @@ csv::Exception::Exception()
 {}
 
 csv::Exception::Exception(const std::string &s)
-    : m_msg("csv::Exception: " + s)
+    : m_msg(s)
 {}
 
 std::string csv::Exception::toString()
