@@ -4,11 +4,11 @@ HEADEREXT   := hpp
 
 # directories
 
-SRC_DIR     := ./src
-BIN_DIR     := ./bin
-LIB_DIR     := ./lib
-EXAMPLE_DIR := ./examples
-INCLUDE_DIR := ./include
+SRC_DIR     := src
+BIN_DIR     := bin
+LIB_DIR     := lib
+EXAMPLE_DIR := examples
+INCLUDE_DIR := include
 
 # compiler options
 
@@ -30,18 +30,26 @@ HEADERS     := $(shell find $(INCLUDE_DIR)/ -name "*.$(HEADEREXT)")
 
 ## release build
 
-all: mkdirp $(TARGET)
+all: mkdirp $(LIB_DIR)/libcsv.hpp $(TARGET)
 
-$(TARGET): $(LIB_DIR)/libcsv.hpp $(SOURCES)
+OBJECTS     := $(patsubst $(SRC_DIR)/%.$(SRCEXT), $(BIN_DIR)/%.$(OBJEXT), $(shell find $(SRC_DIR)/ -name "*.$(SRCEXT)"))
+
+$(OBJECTS): $(SOURCES)
 	@cd $(SRC_DIR) && $(MAKE)
+
+$(TARGET): $(OBJECTS)
 	ar rcs $(TARGET) $(BIN_DIR)/*.$(OBJEXT)
 
 ## debug build
 
-dbg: mkdirp $(DBG_TARGET)
+dbg: mkdirp $(LIB_DIR)/libcsv.hpp $(DBG_TARGET)
 
-$(DBG_TARGET): $(LIB_DIR)/libcsv.hpp $(SOURCES)
+DBG_OBJECTS := $(patsubst $(SRC_DIR)/%.$(SRCEXT), $(BIN_DIR)/%-dbg.$(OBJEXT), $(shell find $(SRC_DIR)/ -name "*.$(SRCEXT)"))
+
+$(DBG_OBJECTS): $(SOURCES)
 	@cd $(SRC_DIR) && $(MAKE) dbg
+
+$(DBG_TARGET): $(DBG_OBJECTS)
 	ar rcs $(DBG_TARGET) $(BIN_DIR)/*-dbg.$(OBJEXT)
 
 $(LIB_DIR)/libcsv.hpp: $(HEADERS)
@@ -52,7 +60,7 @@ $(LIB_DIR)/libcsv.hpp: $(HEADERS)
 
 test: $(TARGET) $(TESTSRC)
 	@$(CC) $(CPPFLAGS) $(INCLUDE) $(EXAMPLE_DIR)/*.cpp -o $(BIN_DIR)/test $(LIB)
-	$(BIN_DIR)/test
+	./$(BIN_DIR)/test
 
 testdbg: $(DBG_TARGET) $(TESTSRC)
 	@$(CC) $(CPPDBGFLAGS) $(INCLUDE) $(EXAMPLE_DIR)/*.cpp -o $(BIN_DIR)/test-dbg $(LIB)
