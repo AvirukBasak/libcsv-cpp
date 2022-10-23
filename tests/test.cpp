@@ -17,6 +17,7 @@ int main()
     std::vector<std::string> colnames = data.getColumnNames();
     int rows = data.rows();
     int cols = data.columns();
+    std::cout << "csv dimensions: " << rows << "×" << cols << "\n";
     std::string name = data[1]["names"].toString(); // returns "Jack"
     std::vector<csv::row> moreThan80 = data.getRows([](csv::row row) { return row["marks"].toInt() > 80; });
     for (auto &row : moreThan80)
