@@ -3,13 +3,17 @@
 #include <string>
 #include <vector>
 
-#include "value.hpp"
-#include "row.hpp"
 #include "data.hpp"
-#include "exceptions.hpp"
 
 namespace csv
 {
+    /**
+     * Tokenizes a line into a row.
+     * @param std::string
+     * @return std::vector<std::string>
+     */
+    std::vector<std::string> tokenizeLine(const std::string &line);
+
     /**
      * Loads a file and returns it as csv::data.
      * @param std::string Path to file

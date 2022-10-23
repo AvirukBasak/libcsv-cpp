@@ -1,31 +1,34 @@
 #include <fstream>
+#include <string>
+#include <vector>
 
-#include "libcsv/data.hpp"
-#include "libcsv/row.hpp"
-#include "libcsv/value.hpp"
 #include "libcsv/main.hpp"
+#include "libcsv/data.hpp"
+
+std::vector<std::string> csv::tokenizeLine(const std::string &line)
+{
+    std::string val = "";
+    std::vector<std::string> tokens;
+    for (const char &c : line)
+        if (c == ' ');
+        else if (c == ',') {
+            tokens.push_back(val);
+            val = "";
+        } else val += c;
+    return tokens;
+}
 
 csv::data csv::loadFile(const std::string &path)
 {
-    int rowno = 0;
-    csv::data csvdata;
-    std::ifstream csvfile;
-    csvfile.open(path);
+    std::ifstream csvfile(path);
+    std::string line;
+    std::getline(csvfile, line);
+    csv::data csvdata(csv::tokenizeLine(line));
+    int rowno = 1;
     while (csvfile) {
-        std::string line;
         std::getline(csvfile, line);
-        std::string val = "";
-        std::vector<std::string> row;
-        for (const char &c : line)
-            if (c == ' ');
-            else if (c == ',') {
-                row.push_back(val);
-                val = "";
-            } else val += c;
-        if (rowno == 0)
-            csvdata.setColumnNames(row);
-        else
-            csvdata.appendRow(row);  
+        csvdata.appendRow(csv::tokenizeLine(line));
+        rowno++;
     }
     csvfile.close();
     return csvdata;
