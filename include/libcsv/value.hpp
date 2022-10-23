@@ -34,7 +34,7 @@ namespace csv
         float toFloat();
         double toDouble();
     private:
-        std::string m_val;
+        const std::string m_val;
     };
     static value garbage_val = "0";
 }

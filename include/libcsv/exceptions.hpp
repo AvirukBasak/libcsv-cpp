@@ -13,7 +13,7 @@ namespace csv
         std::string toString();
         void print();
     protected:
-        std::string m_msg;
+        const std::string m_msg;
     };
 
     /** Occurs when a value is not found at a row, column. */

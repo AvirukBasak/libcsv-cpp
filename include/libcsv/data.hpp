@@ -45,17 +45,33 @@ namespace csv
          */
         std::vector<std::string> getColumnNames();
         /**
-         * Get a row by index from table 
+         * Get a row by index from table.
+         * @param int Row index
          * @return csv::row
          * @throws csv::IndexOutOfBoundsException If rownum is out of range
          */
         csv::row getRow(int rownum);
         /**
-         * Get a row by index from table 
+         * Get a row by index from table.
+         * @param int Row index
          * @return csv::row &
          * @throws csv::IndexOutOfBoundsException If rownum is out of range
          */
         csv::row &operator[](int rownum);
+        /**
+         * Get a row by 1st column value from table.
+         * @param std::string Row UID
+         * @return csv::row
+         * @throws csv::ValueNotFoundException If rownum is out of range
+         */
+        csv::row getRow(const std::string &uid);
+        /**
+         * Get a row by 1st column value from table.
+         * @param std::string Row UID
+         * @return csv::row &
+         * @throws csv::ValueNotFoundException If rownum is out of range
+         */
+        csv::row &operator[](const std::string &uid);
         /**
          * Get a list of rows from the table that satisfy the condition function.
          * @param std::function<bool (csv::row row)>
@@ -72,7 +88,7 @@ namespace csv
         /** Count of rows */
         int m_rowc;
         /** Count of columns */
-        int m_colc;
+        const int m_colc;
         /** Names of columns */
         std::vector<std::string> m_colnames;
         /** List of rows, i.e. the table */

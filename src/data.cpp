@@ -36,9 +36,7 @@ std::vector<std::string> csv::data::getColumnNames()
 
 csv::row csv::data::getRow(int rownum)
 {
-    if (rownum < 0 || rownum >= m_rowc)
-        csv::throwException<csv::IndexOutOfBoundsException>("for index " + std::to_string(rownum));
-    return m_rows[rownum];
+    return csv::data::operator[](rownum);
 }
 
 csv::row &csv::data::operator[](int rownum)
@@ -46,6 +44,19 @@ csv::row &csv::data::operator[](int rownum)
     if (rownum < 0 || rownum >= m_rowc)
         csv::throwException<csv::IndexOutOfBoundsException>("for index " + std::to_string(rownum));
     return m_rows[rownum];
+}
+
+csv::row csv::data::getRow(const std::string &uid)
+{
+    return csv::data::operator[](uid);
+}
+
+csv::row &csv::data::operator[](const std::string &uid)
+{
+    for (const csv::row &row : m_rows)
+        if (row[0] == uid) return row;
+    csv::throwException<csv::ValueNotFoundException>("for row uid \"" + uid + "\"");
+    return csv::garbage_value;
 }
 
 std::vector<csv::row> csv::data::getRows(const std::function<bool (csv::row row)> &condition)

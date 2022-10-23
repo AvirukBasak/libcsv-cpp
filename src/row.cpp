@@ -22,13 +22,7 @@ int csv::row::length()
 
 csv::value csv::row::column(const std::string &colname)
 {
-    int i = 0;
-    for (const std::string &cn : *m_colnames)
-        if (cn == colname)
-            return m_row[i];
-        else i++;
-    csv::throwException<csv::ValueNotFoundException>("for column name \"" + colname + "\"");
-    return csv::garbage_val;
+    return csv::row::operator[](colname);
 }
 
 csv::value &csv::row::operator[](const std::string &colname)
