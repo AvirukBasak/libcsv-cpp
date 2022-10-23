@@ -81,6 +81,7 @@ clean:
 	@cd $(SRC_DIR) && $(MAKE) clean
 
 cleaner:
+	@cd $(SRC_DIR) && $(MAKE) cleaner
 	@rm -rf $(BUILD_DIR)
 	@rm -rf $(BIN_DIR)
 	@rm -rf $(LIB_DIR)
