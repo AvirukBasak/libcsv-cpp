@@ -73,6 +73,7 @@ testdbg: $(DBG_OBJECTS) $(TESTSRC)
 mkdirp:
 	@mkdir -p $(BUILD_DIR)
 	@mkdir -p $(BIN_DIR)
+	@mkdir -p $(LIB_DIR)
 
 ## Clean
 
