@@ -37,14 +37,14 @@ std::vector<std::string> csv::data::getColumnNames()
 csv::row csv::data::getRow(int rownum)
 {
     if (rownum < 0 || rownum >= m_rowc)
-        throw csv::IndexOutOfBoundsException("for index " + std::to_string(rownum));
+        csv::throwException<csv::IndexOutOfBoundsException>("for index " + std::to_string(rownum));
     return m_rows[rownum];
 }
 
 csv::row &csv::data::operator[](int rownum)
 {
     if (rownum < 0 || rownum >= m_rowc)
-        throw csv::IndexOutOfBoundsException("for index " + std::to_string(rownum));
+        csv::throwException<csv::IndexOutOfBoundsException>("for index " + std::to_string(rownum));
     return m_rows[rownum];
 }
 
@@ -59,7 +59,7 @@ std::vector<csv::row> csv::data::getRows(const std::function<bool (csv::row row)
 void csv::data::appendRow(const std::vector<std::string> &row)
 {
     if (row.size() != m_colc)
-        throw csv::ColumnSizeMismatchException("for row parameter with size " + std::to_string(row.size()));
+        csv::throwException<csv::ColumnSizeMismatchException>("for row parameter with size " + std::to_string(row.size()));
     m_rows.push_back(csv::row(&m_colnames, row));
     m_rowc++;
 }

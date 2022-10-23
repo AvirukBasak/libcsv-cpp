@@ -27,7 +27,7 @@ csv::value csv::row::column(const std::string &colname)
         if (cn == colname)
             return m_row[i];
         else i++;
-    throw csv::ValueNotFoundException("for column name \"" + colname + "\"");
+    csv::throwException<csv::ValueNotFoundException>("for column name \"" + colname + "\"");
 }
 
 csv::value &csv::row::operator[](const std::string &colname)
@@ -37,7 +37,7 @@ csv::value &csv::row::operator[](const std::string &colname)
         if (cn == colname)
             return m_row[i];
         else i++;
-    throw csv::ValueNotFoundException("for column name \"" + colname + "\"");
+    csv::throwException<csv::ValueNotFoundException>("for column name \"" + colname + "\"");
 }
 
 csv::row::~row()

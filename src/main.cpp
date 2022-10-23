@@ -1,4 +1,5 @@
 #include <fstream>
+#include <iostream>
 #include <string>
 #include <vector>
 
@@ -22,10 +23,13 @@ csv::data csv::loadFile(const std::string &path)
 {
     std::ifstream csvfile(path);
     std::string line;
-    std::getline(csvfile, line);
+    if (!csvfile.is_open())
+        csv::throwException<csv::FileInputException>("for filepath \"" + path + "\"");
+    if (!csvfile.eof())
+        std::getline(csvfile, line);
     csv::data csvdata(csv::tokenizeLine(line));
     int rowno = 1;
-    while (csvfile) {
+    while (csvfile.is_open() && !csvfile.eof()) {
         std::getline(csvfile, line);
         csvdata.appendRow(csv::tokenizeLine(line));
         rowno++;

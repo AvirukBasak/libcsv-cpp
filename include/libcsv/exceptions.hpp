@@ -46,4 +46,10 @@ namespace csv
         ColumnSizeMismatchException();
         ColumnSizeMismatchException(const std::string &str);
     };
+
+    /** Throw a message less exception*/
+    template <typename T> void csv::throwException();
+
+    /** Throw an exception with a message */
+    template <typename T> void throwException(const std::string &s);
 }

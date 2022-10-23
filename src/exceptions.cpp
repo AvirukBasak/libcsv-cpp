@@ -8,7 +8,7 @@ csv::Exception::Exception()
 {}
 
 csv::Exception::Exception(const std::string &s)
-    : m_msg(s)
+    : m_msg("csv::Exception: " + s)
 {}
 
 std::string csv::Exception::toString()
@@ -52,3 +52,19 @@ csv::ColumnSizeMismatchException::ColumnSizeMismatchException()
 csv::ColumnSizeMismatchException::ColumnSizeMismatchException(const std::string &s)
     : csv::Exception("csv::ColumnSizeMismatchException: " + s)
 {}
+
+template <typename T>
+void csv::throwException()
+{
+    throw T();
+}
+
+template <typename T>
+void csv::throwException(const std::string &s)
+{
+    T ex = T(s);
+#ifdef DEBUG
+    ex.print();
+#endif
+    throw ex;
+}

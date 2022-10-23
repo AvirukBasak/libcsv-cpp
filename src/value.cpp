@@ -55,7 +55,7 @@ bool csv::value::toBool()
         return true;
     else if (m_val == "false" || (int) std::stoi(m_val) == 0)
         return false;
-    else throw csv::TypeMismatchException("for value \"" + m_val + "\"");
+    else csv::throwException<csv::TypeMismatchException>("for value \"" + m_val + "\"");
     return false;
 }
 
