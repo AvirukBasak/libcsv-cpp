@@ -18,6 +18,7 @@ namespace csv
      * Loads a file and returns it as csv::data.
      * @param std::string Path to file
      * @return csv::data
+     * @throws csv::FileOpenFailedException If opening file fails
      */
     data loadFile(const std::string &path);
 }

@@ -9,9 +9,10 @@ namespace csv
     public:
         Exception();
         Exception(const std::string &str);
+        Exception(const std::string &s, bool noprefix);
         std::string toString();
         void print();
-    private:
+    protected:
         std::string m_msg;
     };
 
@@ -47,8 +48,16 @@ namespace csv
         ColumnSizeMismatchException(const std::string &str);
     };
 
+    /** Occurs when file reading fails. */
+    class FileOpenFailedException : public Exception
+    {
+    public:
+        FileOpenFailedException();
+        FileOpenFailedException(const std::string &str);
+    };
+
     /** Throw a message less exception*/
-    template <typename T> void csv::throwException();
+    template <typename T> void throwException();
 
     /** Throw an exception with a message */
     template <typename T> void throwException(const std::string &s);

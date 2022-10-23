@@ -5,6 +5,7 @@
 
 #include "libcsv/main.hpp"
 #include "libcsv/data.hpp"
+#include "libcsv/exceptions.hpp"
 
 std::vector<std::string> csv::tokenizeLine(const std::string &line)
 {
@@ -24,7 +25,7 @@ csv::data csv::loadFile(const std::string &path)
     std::ifstream csvfile(path);
     std::string line;
     if (!csvfile.is_open())
-        csv::throwException<csv::FileInputException>("for filepath \"" + path + "\"");
+        csv::throwException<csv::FileOpenFailedException>("for filepath \"" + path + "\"");
     if (!csvfile.eof())
         std::getline(csvfile, line);
     csv::data csvdata(csv::tokenizeLine(line));
