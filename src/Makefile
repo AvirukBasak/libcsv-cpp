@@ -14,13 +14,14 @@ INCLUDE_DIR := ../include
 
 CC          := clang++ $(WALL)
 CPPFLAGS    := -Ofast
-CPPDBGFLAGS := -g -ggdb
+CPPDBGFLAGS := -g -ggdb -D DEBUG
+DBG         := gdb -q
 
 INCLUDE     := -I $(INCLUDE_DIR)
 
-OBJECTS     := $(patsubst %.$(SRCEXT), %.$(OBJEXT), $(wildcard *.$(SRCEXT)))
-
 ## release build
+
+OBJECTS     := $(patsubst %.$(SRCEXT), %.$(OBJEXT), $(wildcard *.$(SRCEXT)))
 
 all: mkdirp $(OBJECTS) cpobj
 
@@ -29,7 +30,7 @@ all: mkdirp $(OBJECTS) cpobj
 
 ## debug build
 
-DBG_OBJECTS := $(pathsubst %.$(SRCEXT), %-dbg.$(OBJEXT), $(wildcard *.$(SRCEXT)))
+DBG_OBJECTS := $(patsubst %.$(SRCEXT), %-dbg.$(OBJEXT), $(wildcard *.$(SRCEXT)))
 
 dbg: mkdirp $(DBG_OBJECTS) cpobj
 

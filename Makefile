@@ -14,7 +14,8 @@ INCLUDE_DIR := include
 
 CC          := clang++ $(WALL)
 CPPFLAGS    := -Ofast
-CPPDBGFLAGS := -g -ggdb
+CPPDBGFLAGS := -g -ggdb -D DEBUG
+DBG         := gdb -q
 
 INCLUDE     := -I $(INCLUDE_DIR) -I $(LIB_DIR)
 LIB         := -L$(LIB_DIR) -lcsv -lm
@@ -62,8 +63,8 @@ test: $(TARGET) $(TESTSRC)
 	@$(CC) $(CPPFLAGS) $(INCLUDE) $(EXAMPLE_DIR)/*.cpp -o $(BIN_DIR)/test $(LIB)
 	./$(BIN_DIR)/test
 
-testdbg: $(DBG_TARGET) $(TESTSRC)
-	@$(CC) $(CPPDBGFLAGS) $(INCLUDE) $(EXAMPLE_DIR)/*.cpp -o $(BIN_DIR)/test-dbg $(LIB)
+testdbg: $(DBG_OBJECTS) $(TESTSRC)
+	@$(CC) $(CPPDBGFLAGS) $(INCLUDE) $(DBG_OBJECTS) $(EXAMPLE_DIR)/*.cpp -o $(BIN_DIR)/test-dbg
 	$(DBG) $(BIN_DIR)/test-dbg
 
 ## mkdirp
