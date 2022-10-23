@@ -74,10 +74,10 @@ namespace csv
         csv::row operator[](const std::string &uid);
         /**
          * Get a list of rows from the table that satisfy the condition function.
-         * @param std::function<bool (csv::row row)>
+         * @param std::function<bool (const csv::row &row)>
          * @return std::vector<csv::row>
          */
-        std::vector<csv::row> getRows(const std::function<bool (csv::row row)> &condition);
+        std::vector<csv::row> getRows(const std::function<bool (const csv::row &row)> &condition);
         /**
          * Append a rows to the table.
          * @param std::vector<std::string>
