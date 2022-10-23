@@ -1,5 +1,6 @@
+build/*
 bin/*
+lib/*
 *.o
 *.a
 *.out
-lib/*

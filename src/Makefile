@@ -5,9 +5,10 @@ HEADEREXT   := hpp
 # directories
 
 SRC_DIR     := ../src
+BUILD_DIR   := ../build
 BIN_DIR     := ../bin
 LIB_DIR     := ../lib
-EXAMPLE_DIR := ../examples
+TEST_DIR    := ../tests
 INCLUDE_DIR := ../include
 
 # compiler options
@@ -38,13 +39,13 @@ dbg: mkdirp $(DBG_OBJECTS) cpobj
 	$(CC) $(CPPDBGFLAGS) $(INCLUDE) -c -o $@ $<
 
 cpobj:
-	@cp *.$(OBJEXT) $(BIN_DIR)
+	@cp *.$(OBJEXT) $(BUILD_DIR)
 
 mkdirp:
-	@mkdir -p $(BIN_DIR)
+	@mkdir -p $(BUILD_DIR)/
 
 clean:
 	@rm -f *.$(OBJEXT)
 
 cleaner: clean
-	@rm -f $(BIN_DIR)/*.$(OBJEXT)
+	@rm -f $(BUILD_DIR)/*.$(OBJEXT)

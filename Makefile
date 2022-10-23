@@ -5,9 +5,10 @@ HEADEREXT   := hpp
 # directories
 
 SRC_DIR     := src
+BUILD_DIR   := build
 BIN_DIR     := bin
 LIB_DIR     := lib
-EXAMPLE_DIR := examples
+TEST_DIR    := tests
 INCLUDE_DIR := include
 
 # compiler options
@@ -26,32 +27,32 @@ TARGET      := $(LIB_DIR)/libcsv.a
 DBG_TARGET  := $(LIB_DIR)/libcsv-dbg.a
 
 SOURCES     := $(shell find $(SRC_DIR)/ -name "*."$(SRCEXT))
-TESTSRC     := $(shell find $(EXAMPLE_DIR)/ -name "*."$(SRCEXT))
+TESTSRC     := $(shell find $(TEST_DIR)/ -name "*."$(SRCEXT))
 HEADERS     := $(shell find $(INCLUDE_DIR)/ -name "*.$(HEADEREXT)")
 
 ## release build
 
 all: mkdirp $(LIB_DIR)/libcsv.hpp $(TARGET)
 
-OBJECTS     := $(patsubst $(SRC_DIR)/%.$(SRCEXT), $(BIN_DIR)/%.$(OBJEXT), $(shell find $(SRC_DIR)/ -name "*.$(SRCEXT)"))
+OBJECTS     := $(patsubst $(SRC_DIR)/%.$(SRCEXT), $(BUILD_DIR)/%.$(OBJEXT), $(shell find $(SRC_DIR)/ -name "*.$(SRCEXT)"))
 
 $(OBJECTS): $(SOURCES)
 	@cd $(SRC_DIR) && $(MAKE)
 
 $(TARGET): $(OBJECTS)
-	ar rcs $(TARGET) $(BIN_DIR)/*.$(OBJEXT)
+	ar rcs $(TARGET) $(BUILD_DIR)/*.$(OBJEXT)
 
 ## debug build
 
 dbg: mkdirp $(LIB_DIR)/libcsv.hpp $(DBG_TARGET)
 
-DBG_OBJECTS := $(patsubst $(SRC_DIR)/%.$(SRCEXT), $(BIN_DIR)/%-dbg.$(OBJEXT), $(shell find $(SRC_DIR)/ -name "*.$(SRCEXT)"))
+DBG_OBJECTS := $(patsubst $(SRC_DIR)/%.$(SRCEXT), $(BUILD_DIR)/%-dbg.$(OBJEXT), $(shell find $(SRC_DIR)/ -name "*.$(SRCEXT)"))
 
 $(DBG_OBJECTS): $(SOURCES)
 	@cd $(SRC_DIR) && $(MAKE) dbg
 
 $(DBG_TARGET): $(DBG_OBJECTS)
-	ar rcs $(DBG_TARGET) $(BIN_DIR)/*-dbg.$(OBJEXT)
+	ar rcs $(DBG_TARGET) $(BUILD_DIR)/*-dbg.$(OBJEXT)
 
 $(LIB_DIR)/libcsv.hpp: $(HEADERS)
 	@grep --no-filename -v '^#\s*include\s*"' $(HEADERS) > $(LIB_DIR)/libcsv.hpp
@@ -60,16 +61,17 @@ $(LIB_DIR)/libcsv.hpp: $(HEADERS)
 ## execution
 
 test: $(TARGET) $(TESTSRC)
-	@$(CC) $(CPPFLAGS) $(INCLUDE) $(EXAMPLE_DIR)/*.cpp -o $(BIN_DIR)/test $(LIB)
+	@$(CC) $(CPPFLAGS) $(INCLUDE) $(TEST_DIR)/*.cpp -o $(BIN_DIR)/test $(LIB)
 	./$(BIN_DIR)/test
 
 testdbg: $(DBG_OBJECTS) $(TESTSRC)
-	@$(CC) $(CPPDBGFLAGS) $(INCLUDE) $(DBG_OBJECTS) $(EXAMPLE_DIR)/*.cpp -o $(BIN_DIR)/test-dbg
+	@$(CC) $(CPPDBGFLAGS) $(INCLUDE) $(DBG_OBJECTS) $(TEST_DIR)/*.cpp -o $(BIN_DIR)/test-dbg
 	$(DBG) $(BIN_DIR)/test-dbg
 
 ## mkdirp
 
 mkdirp:
+	@mkdir -p $(BUILD_DIR)
 	@mkdir -p $(BIN_DIR)
 
 ## Clean
@@ -79,7 +81,8 @@ clean:
 
 cleaner:
 	@cd $(SRC_DIR) && $(MAKE) cleaner
-	@rm -f $(BIN_DIR)/*
+	@rm -f $(LIB_DIR)/libcsv.hpp
 	@rm -f $(TARGET)
 	@rm -f $(DBG_TARGET)
-	@rm -f $(LIB_DIR)/libcsv.hpp
+	@rm -f $(BUILD_DIR)/*
+	@rm -f $(BIN_DIR)/*
