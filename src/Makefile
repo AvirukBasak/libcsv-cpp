@@ -13,7 +13,7 @@ INCLUDE_DIR := ../include
 
 # compiler options
 
-CC          := clang++ $(WALL)
+CC          := clang++ -Wall
 CPPFLAGS    := -Ofast
 CPPDBGFLAGS := -g -ggdb -D DEBUG
 DBG         := gdb -q
