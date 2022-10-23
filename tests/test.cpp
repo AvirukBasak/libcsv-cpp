@@ -18,13 +18,13 @@ int main()
     int rows = data.rows();
     int cols = data.columns();
     std::cout << "csv dimensions: " << rows << "×" << cols << "\n";
-    std::string name = data["i03"]["names"].toString(); // returns "Jack"
-    std::cout << "retrieved name: " << name << ", for id: " << "i03" << "\n";
+    std::string name = data["i02"]["names"].toString(); // returns "Joseph"
+    std::cout << "retrieved name: " << name << ", for id: " << "i02" << "\n";
     std::vector<csv::row> moreThan80 = data.getRows([](csv::row row) { return row["marks"].toInt() > 80; });
     for (auto &row : moreThan80)
         if (row["names"].toString() == "Joe") {
             std::cout << "Joe's score is over 80\n";
-            std::cout << "Joe's uid is " << row["uid"].toString() << "\n";
+            std::cout << "Joe's slno is " << row["slno"].toString() << "\n";
             break;
         }
     return 0;
