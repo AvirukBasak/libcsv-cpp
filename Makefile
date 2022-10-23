@@ -81,9 +81,6 @@ clean:
 	@cd $(SRC_DIR) && $(MAKE) clean
 
 cleaner:
-	@cd $(SRC_DIR) && $(MAKE) cleaner
-	@rm -f $(LIB_DIR)/libcsv.hpp
-	@rm -f $(TARGET)
-	@rm -f $(DBG_TARGET)
-	@rm -f $(BUILD_DIR)/*
-	@rm -f $(BIN_DIR)/*
+	@rm -rf $(BUILD_DIR)
+	@rm -rf $(BIN_DIR)
+	@rm -rf $(LIB_DIR)
