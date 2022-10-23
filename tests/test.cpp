@@ -15,6 +15,10 @@ int main()
      */
     csv::data data = csv::loadFile("tests/files/test.csv");
     std::vector<std::string> colnames = data.getColumnNames();
+    std::cout << "columns present: { ";
+    for (const auto &name : colnames)
+        std::cout << name << ", ";
+    std::cout << "}\n";
     int rows = data.rows();
     int cols = data.columns();
     std::cout << "csv dimensions: " << rows << "×" << cols << "\n";
