@@ -3,8 +3,6 @@
 #include <string>
 #include <vector>
 
-#include "exceptions.hpp"
-
 namespace csv
 {
     class value

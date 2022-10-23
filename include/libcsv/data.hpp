@@ -4,9 +4,8 @@
 #include <vector>
 #include <functional>
 
-#include "value.hpp"
 #include "row.hpp"
-#include "exceptions.hpp"
+#include "value.hpp"
 
 namespace csv
 {

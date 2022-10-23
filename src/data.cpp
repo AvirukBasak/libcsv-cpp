@@ -2,6 +2,7 @@
 #include <vector>
 #include <functional>
 
+#include "libcsv/exceptions.hpp"
 #include "libcsv/data.hpp"
 
 csv::data::data(const std::vector<std::string> &colnames)

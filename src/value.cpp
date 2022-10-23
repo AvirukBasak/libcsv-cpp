@@ -1,6 +1,7 @@
 #include <string>
 #include <vector>
 
+#include "libcsv/exceptions.hpp"
 #include "libcsv/value.hpp"
 
 csv::value::value(bool v)
@@ -54,7 +55,7 @@ bool csv::value::toBool()
         return true;
     else if (m_val == "false" || (int) std::stoi(m_val) == 0)
         return false;
-    else csv::throwException(csv::TypeMismatchException);
+    else throw csv::TypeMismatchException("for value \"" + m_val + "\"");
     return false;
 }
 

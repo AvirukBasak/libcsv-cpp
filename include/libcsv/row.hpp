@@ -4,7 +4,6 @@
 #include <vector>
 
 #include "value.hpp"
-#include "exceptions.hpp"
 
 namespace csv
 {

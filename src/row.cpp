@@ -1,6 +1,7 @@
 #include <string>
 #include <vector>
 
+#include "libcsv/exceptions.hpp"
 #include "libcsv/row.hpp"
 
 csv::row::row(const csv::row &r)
@@ -10,7 +11,7 @@ csv::row::row(const csv::row &r)
 csv::row::row(const std::vector<std::string> *colnames, const std::vector<std::string> &r)
     : m_colnames(colnames)
 {
-    for (auto &str : row)
+    for (auto &str : r)
         m_row.push_back(csv::value(str));
 }
 
@@ -27,7 +28,6 @@ csv::value csv::row::column(const std::string &colname)
             return m_row[i];
         else i++;
     throw csv::ValueNotFoundException("for column name \"" + colname + "\"");
-    return "NULL";
 }
 
 csv::value &csv::row::operator[](const std::string &colname)
@@ -38,7 +38,6 @@ csv::value &csv::row::operator[](const std::string &colname)
             return m_row[i];
         else i++;
     throw csv::ValueNotFoundException("for column name \"" + colname + "\"");
-    return "NULL";
 }
 
 csv::row::~row()
