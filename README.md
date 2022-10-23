@@ -1,6 +1,10 @@
 # libcsv
 CSV file static library in C++
 
+## Demo
+Visit [test.cpp](tests/test.cpp) for demo code.
+Run `make test` to verify demo.
+
 ## Usage
 
 #### Build
