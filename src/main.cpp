@@ -7,13 +7,14 @@
 #include "libcsv/data.hpp"
 #include "libcsv/exceptions.hpp"
 
-std::vector<std::string> csv::tokenizeLine(const std::string &line)
+std::vector<std::string> csv::tokenizeLine(const std::string &ln)
 {
+    std::string line = ln + "\n";
     std::string val = "";
     std::vector<std::string> tokens;
     for (const char &c : line)
-        if (c == ' ');
-        else if (c == ',') {
+        if (c == 0x20 || c == 0x0c);
+        else if (c == 0x0a || c == ',') {
             tokens.push_back(val);
             val = "";
         } else val += c;

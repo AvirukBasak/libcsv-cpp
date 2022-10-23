@@ -57,8 +57,18 @@ namespace csv
     };
 
     /** Throw a message less exception*/
-    template <typename T> void throwException();
+    template <typename T> void throwException()
+    {
+        throw T();
+    }
 
     /** Throw an exception with a message */
-    template <typename T> void throwException(const std::string &s);
+    template <typename T> void throwException(const std::string &s)
+    {
+        T ex = T(s);
+    #ifdef DEBUG
+        ex.print();
+    #endif
+        throw ex;
+    }
 }

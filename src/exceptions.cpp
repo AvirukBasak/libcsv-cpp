@@ -64,19 +64,3 @@ csv::FileOpenFailedException::FileOpenFailedException()
 csv::FileOpenFailedException::FileOpenFailedException(const std::string &s)
     : csv::Exception("csv::FileOpenFailedException: " + s, true)
 {}
-
-template <typename T>
-void csv::throwException()
-{
-    throw T();
-}
-
-template <typename T>
-void csv::throwException(const std::string &s)
-{
-    T ex = T(s);
-#ifdef DEBUG
-    ex.print();
-#endif
-    throw ex;
-}

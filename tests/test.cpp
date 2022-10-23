@@ -13,7 +13,7 @@ int main()
      *   4,   Joseph,    i04,  84
      *   0,   Joe,       i05,  93
      */
-    csv::data data = csv::loadFile("files/test.csv");
+    csv::data data = csv::loadFile("tests/files/test.csv");
     std::vector<std::string> colnames = data.getColumnNames();
     int rows = data.rows();
     int cols = data.columns();

@@ -11,7 +11,7 @@ namespace csv
         friend class row;
         friend class value;
     public:
-        value() = delete;
+        value();
         value(bool v);
         value(char v);
         value(short v);
@@ -36,4 +36,5 @@ namespace csv
     private:
         std::string m_val;
     };
+    static value garbage_val = "0";
 }
