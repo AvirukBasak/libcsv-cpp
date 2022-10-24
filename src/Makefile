@@ -13,12 +13,15 @@ INCLUDE_DIR := ../include
 
 # compiler options
 
-CC          := clang++ -Wall
-CPPFLAGS    := -Ofast
-CPPDBGFLAGS := -g -ggdb -D DEBUG
+LIB_NAME    := csv
+
+CC          := g++
+CPPFLAGS    := -Wall -Ofast
+CPPDBGFLAGS := -Wall -g -ggdb -D DEBUG
 DBG         := gdb -q
 
-INCLUDE     := -I $(INCLUDE_DIR)
+INCLUDE     := -I $(INCLUDE_DIR) -I $(LIB_DIR)
+LIB         := -L$(LIB_DIR) -l$(LIB_NAME) -lm
 
 ## release build
 
