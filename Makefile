@@ -15,8 +15,7 @@ INCLUDE_DIR := include
 
 LIB_NAME    := csv
 
-CC          := gcc
-CPP         := g++
+CC          := g++
 CFLAGS      := -Wall -Ofast
 CDBGFLAGS   := -Wall -g -ggdb -D DEBUG
 DBG         := gdb -q
@@ -65,11 +64,11 @@ $(LIB_DIR)/$(TARGET_NAME).$(HEADEREXT): $(HEADERS)
 ## execution
 
 test: mkdirp $(TARGET) $(TESTSRC)
-	@$(CPP) $(CFLAGS) $(INCLUDE) $(TEST_DIR)/*.$(SRCEXT) -o $(BIN_DIR)/test $(LIB)
+	@$(CC) $(CFLAGS) $(INCLUDE) $(TEST_DIR)/*.$(SRCEXT) -o $(BIN_DIR)/test $(LIB)
 	./$(BIN_DIR)/test
 
 testdbg: mkdirp $(DBG_OBJECTS) $(TESTSRC)
-	@$(CPP) $(CDBGFLAGS) $(INCLUDE) $(DBG_OBJECTS) $(TEST_DIR)/*.$(SRCEXT) -o $(BIN_DIR)/test-dbg
+	@$(CC) $(CDBGFLAGS) $(INCLUDE) $(DBG_OBJECTS) $(TEST_DIR)/*.$(SRCEXT) -o $(BIN_DIR)/test-dbg
 	$(DBG) $(BIN_DIR)/test-dbg
 
 ## mkdirp

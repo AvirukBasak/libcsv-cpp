@@ -15,8 +15,7 @@ INCLUDE_DIR := ../include
 
 LIB_NAME    := csv
 
-CC          := gcc
-CPP         := g++
+CC          := g++
 CFLAGS      := -Wall -Ofast
 CDBGFLAGS   := -Wall -g -ggdb -D DEBUG
 DBG         := gdb -q
@@ -31,7 +30,7 @@ OBJECTS     := $(patsubst %.$(SRCEXT), %.$(OBJEXT), $(wildcard *.$(SRCEXT)))
 all: mkdirp $(OBJECTS) cpobj
 
 %.$(OBJEXT): %.$(SRCEXT)
-	$(CPP) $(CFLAGS) $(INCLUDE) -c -o $@ $<
+	$(CC) $(CFLAGS) $(INCLUDE) -c -o $@ $<
 
 ## debug build
 
@@ -40,7 +39,7 @@ DBG_OBJECTS := $(patsubst %.$(SRCEXT), %-dbg.$(OBJEXT), $(wildcard *.$(SRCEXT)))
 dbg: mkdirp $(DBG_OBJECTS) cpobj
 
 %-dbg.$(OBJEXT): %.$(SRCEXT)
-	$(CPP) $(CDBGFLAGS) $(INCLUDE) -c -o $@ $<
+	$(CC) $(CDBGFLAGS) $(INCLUDE) -c -o $@ $<
 
 cpobj:
 	@cp *.$(OBJEXT) $(BUILD_DIR)
